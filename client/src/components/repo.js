@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import {
+  Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button, Col, Row
+} from 'reactstrap';
 import * as actions from '../actions';
 
 class Repo extends Component {
@@ -17,6 +21,7 @@ componentDidMount(){
 }
 
 render() {
+  console.log(this.props.user)
 return (
   <div id="home-page">
     <Navbar fixed="top" className="sticky-nav">
@@ -35,16 +40,21 @@ return (
           <Nav.Link href="#link">Link</Nav.Link>
         </Nav>
     </Navbar>
-    <div>
+    <Row>
+   
     {
         this.props.user.map(data => (
-            <ul>
-                <li>{data.name}</li>
-            </ul>
-                
+          <Card>
+          <CardBody>
+            <CardTitle>{data.name}</CardTitle>
+            <CardSubtitle>Card subtitle</CardSubtitle>
+            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+            <Button>Button</Button>
+          </CardBody>
+          </Card>
         ))
-    }
-    </div>
+       }
+    </Row>
   </div>
     ) 
   }
