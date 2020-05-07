@@ -40,10 +40,10 @@ return (
           <Nav.Link href="#link">Link</Nav.Link>
         </Nav>
     </Navbar>
-    <Row>
-   
+    <Row className="flex-row align-items-center">
     {
         this.props.user.map(data => (
+          <Col sm="5" id="col">
           <Card>
           <CardBody>
             <CardTitle>{data.name}</CardTitle>
@@ -52,6 +52,7 @@ return (
             <Button>Button</Button>
           </CardBody>
           </Card>
+          </Col>
         ))
        }
     </Row>
