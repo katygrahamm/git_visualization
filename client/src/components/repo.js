@@ -17,11 +17,21 @@ class Repo extends Component {
 componentDidMount(){
     let username = localStorage.getItem('username')
     this.props.fetchUser(username)
-    console.log(username)
+    
 }
 
 render() {
-  console.log(this.props.user)
+
+  this.props.user.sort(function(a, b) {
+    var c = new Date(a.created_at);
+    var d = new Date(b.created_at);
+    return c-d;
+});
+
+if(this.props.user === undefined) {
+  return <div> Loading... </div>
+} else {
+console.log(this.props.user[0])
 return (
   <div id="home-page">
     <Navbar fixed="top" className="sticky-nav">
@@ -40,24 +50,43 @@ return (
           <Nav.Link href="#link">Link</Nav.Link>
         </Nav>
     </Navbar>
-    <Row className="flex-row align-items-center">
+    <div className="container">
+    <Row>
+    <Col>
+      <br />
+          <Card>
+            <CardImg top width="100%" src=""alt="Card image cap" />
+              <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardSubtitle>Card subtitle</CardSubtitle>
+                <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                <Button>Button</Button>
+              </CardBody>
+          </Card>
+    </Col>
+    <Col>
+    <ul class="timeline">
+      <br />
     {
         this.props.user.map(data => (
-          <Col sm="5" id="col">
-          <Card>
-          <CardBody>
-            <CardTitle>{data.name}</CardTitle>
-            <CardSubtitle>Card subtitle</CardSubtitle>
-            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-            <Button>Button</Button>
-          </CardBody>
-          </Card>
-          </Col>
+          <li id="repo-name">
+		        <div class="direction-r">
+			        <div class="flag-wrapper">
+				      <span class="flag">{data.name}</span>
+              <span class="time-wrapper"><span class="time">{data.created_at}</span></span>
+			      </div>
+            <div class="desc">{data.languages}</div>
+		        </div>
+	        </li>
         ))
        }
-    </Row>
+     </ul>
+     </Col>
+     </Row>
+    </div> 
   </div>
-    ) 
+      ) 
+    }
   }
 }
 
